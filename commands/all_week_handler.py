@@ -53,7 +53,7 @@ def subjects_list(user_id, body):
     '''
     #if klass.klass_of_user(user_id) == '':
         #return 'Тебе необходимо отправить свой класс, чтобы получать расписание'
-    klassname = '10м'#цифра и буква класса
+    klassname = klass.klass_of_user(user_id)#цифра и буква класса
     klassnumber = klass_column_in_spreadsheet(klassname, user_id)#номер столбца класса
     daynumber = 2#счётчик, ищущий строку дня недели в таблице
     subj_number = 1#нумератор выдаваемых уроков (для красоты)
@@ -96,4 +96,3 @@ tomorrow_command = command_system.Command()
 tomorrow_command.keys = ['неделя']
 tomorrow_command.process = subjects_list
 
-print(subjects_list(1234, 'sdf'))
