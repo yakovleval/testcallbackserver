@@ -23,6 +23,6 @@ def processing():
         session = vk.Session()
         api = vk.API(session, v=5.50)
         user_id = data['object']['user_id']
-        api.messages.send(access_token=token, user_id=str(user_id), message='Привет, я новый бот!' + datetime.datetime.now() )
+        api.messages.send(access_token=token, user_id=str(user_id), message='Привет, я новый бот!' + str(datetime.datetime.now()) )
         # Сообщение о том, что обработка прошла успешно
         return 'ok'
