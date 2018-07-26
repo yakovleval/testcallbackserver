@@ -67,24 +67,62 @@ def subjects_list(user_id, body):
     :param body: здесь бесполезен, нужен чтобы не нарушать логику вызова c.process, в ктр передаётся два аргумента
     :return:список уроков на некст день
     '''
-    if klass.klass_of_user(user_id) == '':
-        return 'Тебе необходимо отправить свой класс, чтобы получать расписание'
+    #if klass.klass_of_user(user_id) == '':
+        #return 'Тебе необходимо отправить свой класс, чтобы получать расписание'
     t_day_number = tomorrow_day_number()#номер строчки, где начинается завтрашний день
     if weekdays[t_day_number] == 'воскресенье':
         return 'завтра выходной :>'
-    klassname = klass.klass_of_user(user_id)#цифра и бува класса
+    klassname = klass.klass_of_user(user_id)#цифра и буква класса
     klassnumber = klass_column_in_spreadsheet(klassname, user_id)#номер столбца класса
     daynumber = 2#счётчик, ищущий строку дня недели в таблице
     subj_number = 1#нумератор выдаваемых уроков (для красоты)
     message = ''
-    while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number]: #ищет строку дня недели в таблице
-        daynumber += 1
+    if klassname in list_with_double_classes:
+        while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number]: #ищет строку дня недели в таблице
+            daynumber += 1
+        if weekdays[t_day_number] == 'суббота':
+            while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
+                if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+                else:
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+
+        else:
+            while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number + 1]:
+                if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+                else:
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+    else:
+        while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number]: #ищет строку дня недели в таблице
+            daynumber += 1
+        if weekdays[t_day_number] == 'суббота':
+            while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
+                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                daynumber += 1
+                subj_number += 1
+        else:
+            while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number + 1]:
+                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                daynumber += 1
+                subj_number += 1
+
+
+
+    '''
     for subject_line in range(daynumber, daynumber + 7):#прибавляет к message новый урок
-        message += str(subj_number) + '.' + str((sheet.row_values(subject_line)[klassnumber])).lower() + '\n'
+        message += sheet.row_values(subject_line)[0].lower() + str(subj_number) + '.' + str((sheet.row_values(subject_line)[klassnumber])).lower() + '\n'
         subj_number += 1
-
+    '''
     return message
-
 
 
 tomorrow_command = command_system.Command()
