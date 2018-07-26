@@ -66,32 +66,38 @@ def subjects_list(user_id, body):
             if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
                 if str((sheet.row_values(daynumber)[0])) != '':
                     subj_number = 1
-                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + subject + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
                     daynumber += 1
                     subj_number += 1
                 else:
-                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                    message += str(subj_number) + '.' + subject + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
                     daynumber += 1
                     subj_number += 1
             else:
                 if str((sheet.row_values(daynumber)[0])) != '':
                     subj_number = 1
-                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + subject + '\n'
                     daynumber += 1
                     subj_number += 1
                 else:
-                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                    message += str(subj_number) + '.' + subject + '\n'
                     daynumber += 1
                     subj_number += 1
         message += 'CУББОТА' + '\n'
         subj_number = 1
         while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
             if sheet.row_values(daynumber)[klassnumber + 1] != '':
-                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                message += str(subj_number) + '.' + subject + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
                 daynumber += 1
                 subj_number += 1
             else:
-                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                subject = max('           ', str((sheet.row_values(daynumber)[klassnumber])).lower())
+                message += str(subj_number) + '.' +subject + '\n'
                 daynumber += 1
                 subj_number += 1
     else:
