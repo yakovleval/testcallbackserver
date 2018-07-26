@@ -77,7 +77,7 @@ def subjects_list(user_id, body):
     daynumber = 2#счётчик, ищущий строку дня недели в таблице
     subj_number = 1#нумератор выдаваемых уроков (для красоты)
     message = ''
-    if klassname in list_with_double_classes:
+    if klassname in klass.list_with_double_classes:
         while sheet.row_values(daynumber)[0].lower() != weekdays[t_day_number]: #ищет строку дня недели в таблице
             daynumber += 1
         if weekdays[t_day_number] == 'суббота':
