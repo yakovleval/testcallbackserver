@@ -20,7 +20,7 @@ def processing():
         return confirmation_token
     elif data['type'] == 'message_new':
         session = vk.Session()
-        api = vk.API(session, v=5.0)
+        api = vk.API(session, v=5.50)
         user_id = data['object']['user_id']
         api.messages.send(access_token=token, user_id=str(user_id), message='Привет, я новый бот!')
         # Сообщение о том, что обработка прошла успешно
