@@ -1,1 +1,1 @@
-web: unicorn main.py:app
+web: gunicorn main.py:app
