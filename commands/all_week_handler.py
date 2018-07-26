@@ -30,7 +30,7 @@ def klass_column_in_spreadsheet(body, user_id):
     :return: номер столбца, в котором нужный класс
     '''
     global sheet
-    userklass = body#klass.klass_of_user(user_id)
+    userklass = klass.klass_of_user(user_id)
     if userklass[0] + userklass[1] == '11':
         sheet = rb.sheet_by_index(1)
     else:
@@ -54,36 +54,66 @@ def subjects_list(user_id, body):
     #if klass.klass_of_user(user_id) == '':
         #return 'Тебе необходимо отправить свой класс, чтобы получать расписание'
     klassname = klass.klass_of_user(user_id)#цифра и буква класса
+    if klassname == '':
+        return 'тебе необходимо отправить свой класс, чтобы получать расписание'
     klassnumber = klass_column_in_spreadsheet(klassname, user_id)#номер столбца класса
     daynumber = 2#счётчик, ищущий строку дня недели в таблице
     subj_number = 1#нумератор выдаваемых уроков (для красоты)
     message = ''
+
     if klassname in klass.list_with_double_classes:
         while str((sheet.row_values(daynumber)[0])).lower() != 'суббота':
             if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
-                message += str((sheet.row_values(daynumber)[0])) + str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                if str((sheet.row_values(daynumber)[0])) != '':
+                    subj_number = 1
+                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+                else:
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+            else:
+                if str((sheet.row_values(daynumber)[0])) != '':
+                    subj_number = 1
+                    message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+                else:
+                    message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                    daynumber += 1
+                    subj_number += 1
+        message += 'CУББОТА' + '\n'
+        subj_number = 1
+        while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
+            if sheet.row_values(daynumber)[klassnumber + 1] != '':
+                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
                 daynumber += 1
                 subj_number += 1
             else:
-                message +=  str((sheet.row_values(daynumber)[0])) + str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
                 daynumber += 1
                 subj_number += 1
-        while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
-            if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
-                message +=  str((sheet.row_values(daynumber)[0])) + str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '/' + str((sheet.row_values(daynumber)[klassnumber + 1])).lower() + '\n'
-                daynumber += 1
-                subj_number += 1
-
     else:
         while str((sheet.row_values(daynumber)[0])).lower() != 'суббота':
-            message +=  str((sheet.row_values(daynumber)[0])) + str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
-            daynumber += 1
-            subj_number += 1
-        while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
-            if str((sheet.row_values(daynumber)[klassnumber + 1])).lower() != '':
-                message +=  str((sheet.row_values(daynumber)[0])) + str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower()  + '\n'
+            if str((sheet.row_values(daynumber)[0])) != '':
+                subj_number = 1
+                message += str((sheet.row_values(daynumber)[0])).upper() + '\n'+ str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
                 daynumber += 1
                 subj_number += 1
+            else:
+                message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+                daynumber += 1
+                subj_number += 1
+        message += 'CУББОТА' + '\n'
+        subj_number = 1
+        while sheet.row_values(daynumber - 1)[klassnumber - 1] != sheet.row_values(-1)[klassnumber - 1]:
+            message += str(subj_number) + '.' + str((sheet.row_values(daynumber)[klassnumber])).lower() + '\n'
+            daynumber += 1
+            subj_number += 1
+
+
+
 
 
 
@@ -96,3 +126,4 @@ tomorrow_command = command_system.Command()
 tomorrow_command.keys = ['неделя']
 tomorrow_command.process = subjects_list
 
+print(subjects_list(1234, 'sdf'))
