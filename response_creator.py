@@ -30,6 +30,6 @@ def create_message(user_id, user_message):
     '''
     message = "Прости, не понимаю тебя."
     for c in command_list:
-        if user_message in c.keys:
+        if user_message.lower() in c.keys:
             message = c.process(user_id, user_message)
     return message
