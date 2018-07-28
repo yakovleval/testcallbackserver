@@ -129,7 +129,7 @@ def subjects_list(user_id, body):
 
 tomorrow_command = command_system.Command()
 
-tomorrow_command.keys = ['неделя']
+tomorrow_command.keys = ['неделя', 'Неделя']
 tomorrow_command.process = subjects_list
 
 print(subjects_list(1234, 'sdf'))

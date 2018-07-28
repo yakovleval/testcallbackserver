@@ -129,5 +129,5 @@ def subjects_list(user_id, body):
 
 tomorrow_command = command_system.Command()
 
-tomorrow_command.keys = ['завтра']
+tomorrow_command.keys = ['завтра', 'Завтра']
 tomorrow_command.process = subjects_list
