@@ -7,7 +7,7 @@ from flask import Flask, request, json
 app = Flask(__name__)
 
 
-token = 'a6ce7f02770d6f1c1ccbfc042bd349f9b208338ad1a2314612f5790e51e2f4e085fb6baf45f8f43857f4d'
+
 confirmation_token = '6071d7c2'
 
 @app.route('/', methods=['POST'])

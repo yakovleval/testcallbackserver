@@ -1,5 +1,6 @@
 import command_system
 import psycopg2
+from settings import host, port, database, user, password
 
 list_with_double_classes = ['11г', '11к', '11л', '10в', '10к']
 
@@ -8,9 +9,9 @@ list_with_double_classes = ['11г', '11к', '11л', '10в', '10к']
 
 def klass_change(user_id, user_message):
     user_msg = user_message[0] + user_message[1] + user_message[-1].lower()
-    conn = psycopg2.connect(host='ec2-54-217-235-137.eu-west-1.compute.amazonaws.com', port='5432', database='dbi9dq212bg4sq',
-                            user='yvyloqfqwtebtk',
-                            password='64092c34e652d59ef86eb0863fe845a4e1cd8f43444d06c25f2024de3e825f1d')
+    conn = psycopg2.connect(host=host, port=port, database=database,
+                            user=user,
+                            password=password)
     cur = conn.cursor()
 
     cur.execute('select * from users')
@@ -31,9 +32,9 @@ def klass_change(user_id, user_message):
 
 
 def klass_of_user(user_id):
-    conn = psycopg2.connect(host='ec2-54-217-235-137.eu-west-1.compute.amazonaws.com', port='5432', database='dbi9dq212bg4sq',
-                            user='yvyloqfqwtebtk',
-                            password='64092c34e652d59ef86eb0863fe845a4e1cd8f43444d06c25f2024de3e825f1d')
+    conn = psycopg2.connect(host=host, port=port, database=database,
+                            user=user,
+                            password=password)
     cur = conn.cursor()
     cur.execute('select * from users')
     rows = cur.fetchall()

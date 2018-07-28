@@ -1,10 +1,11 @@
 import vk
 import os
 import importlib
+from settings import token
 from command_system import command_list
 
 
-token = 'a6ce7f02770d6f1c1ccbfc042bd349f9b208338ad1a2314612f5790e51e2f4e085fb6baf45f8f43857f4d'
+
 
 
 def load_modules():
