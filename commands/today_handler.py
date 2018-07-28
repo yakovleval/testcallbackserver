@@ -73,6 +73,8 @@ def subjects_list(user_id, body):
     if weekdays[t_day_number] == 'воскресенье':
         return 'сегодня выходной :>'
     klassname = klass.klass_of_user(user_id)#цифра и буква класса
+    if klassname == '':
+        return 'тебе необходимо отправить свой класс, чтобы получать расписание'
     klassnumber = klass_column_in_spreadsheet(klassname, user_id)#номер столбца класса
     daynumber = 2#счётчик, ищущий строку дня недели в таблице
     subj_number = 1#нумератор выдаваемых уроков (для красоты)

@@ -1,4 +1,5 @@
 import command_system
+import psycopg2
 
 list_with_double_classes = ['11г', '11к', '11л', '10в', '10к']
 
@@ -6,50 +7,41 @@ list_with_double_classes = ['11г', '11к', '11л', '10в', '10к']
 #users = {}
 
 def klass_change(user_id, user_message):
-    '''
-    s = body[0] + body[1] + body[-1].lower()
-    users[user_id] = s
-    message = 'класс, для которого отсылается расписание, изменён на ' + '"' + s + '"'
+    user_msg = user_message[0] + user_message[1] + user_message[-1].lower()
+    conn = psycopg2.connect(host='ec2-54-217-235-137.eu-west-1.compute.amazonaws.com', port='5432', database='dbi9dq212bg4sq',
+                            user='yvyloqfqwtebtk',
+                            password='64092c34e652d59ef86eb0863fe845a4e1cd8f43444d06c25f2024de3e825f1d')
+    cur = conn.cursor()
+
+    cur.execute('select * from users')
+    rows = cur.fetchall()
+    message = 'класс, для которого отслыается расписание, изменён на' + '"' + user_msg + '"' + '.'
+    for row in rows:
+        if row[0] == user_id:
+            cur.execute('update users set grade = %s where user_id = %s;', (user_msg, user_id))
+            conn.commit()
+            conn.close()
+            return message
+    cur.execute('insert into users(user_id, grade) values(%s, %s);', (user_id, user_msg))
+    conn.commit()
+    conn.close()
     return message
-    '''
-    str_user_id = str(user_id)
-    file = open('users.txt', encoding='utf-8')
-    lines = file.readlines()
-    file.close()
-    if str_user_id + '\n' in lines:
-        f = open('users.txt', encoding='utf-8')
-        a = f.readlines()
-
-        f.close()
-        index = a.index(str_user_id + '\n') + 1
-        a[index] = user_message + '\n'
-
-        f = open('users.txt', 'w', encoding='utf-8')
-        for line in a:
-            f.write(line)
-        f.close()
 
 
 
-
-
-    else:
-        f = open('users.txt', 'a', encoding='utf-8')
-        f.write(str_user_id + '\n')
-        f.write(user_message + '\n')
-        f.close()
-    message = 'класс, для которого отсылается расписание, изменён на ' + '"' + user_message + '"'
-    print(user_message)
-    return message
 
 def klass_of_user(user_id):
-    file = open('users.txt', encoding='utf-8')
-    lines = file.readlines()
-    file.close()
-    if str(user_id) + '\n' not in lines:
-        return ''
-    else:
-        return lines[lines.index(str(user_id)+'\n') + 1][0] + lines[lines.index(str(user_id)+'\n') + 1][1] + lines[lines.index(str(user_id)+'\n') + 1][2]
+    conn = psycopg2.connect(host='ec2-54-217-235-137.eu-west-1.compute.amazonaws.com', port='5432', database='dbi9dq212bg4sq',
+                            user='yvyloqfqwtebtk',
+                            password='64092c34e652d59ef86eb0863fe845a4e1cd8f43444d06c25f2024de3e825f1d')
+    cur = conn.cursor()
+    cur.execute('select * from users')
+    rows = cur.fetchall()
+    conn.close()
+    for row in rows:
+        if row[0] == user_id:
+            return row[1]
+    return ''
 
 
 
