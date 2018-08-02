@@ -1,5 +1,5 @@
 import command_system
-def start_message():
+def start_message(x,y):
     message = 'чтобы начать получать расписание, отправь свой класс'
     return message
 
