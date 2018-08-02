@@ -16,7 +16,7 @@ def klass_change(user_id, user_message):
 
     cur.execute('select * from users')
     rows = cur.fetchall()
-    message = 'класс, для которого отслыается расписание, изменён на' + '"' + user_msg + '"' + '.'
+    message = 'класс, для которого отслыается расписание, изменён на ' + '"' + user_msg + '"' + '.' + '\n' + 'теперь отправь команду сегодня/завтра/неделя, чтобы получить соответствующее расписание.'
     for row in rows:
         if row[0] == user_id:
             cur.execute('update users set grade = %s where user_id = %s;', (user_msg, user_id))
