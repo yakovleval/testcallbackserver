@@ -49,9 +49,9 @@ def send_message(user_id, user_message):
     load_modules()
     msg = create_message(user_id, user_message)
     if msg[1]:
-        api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=keyboard)
+        api.messages.send(access_token=token, user_id=str(user_id), message=msg[0], keyboard=keyboard)
     else:
-        api.messages.send(access_token=token, user_id=str(user_id), message=msg)
+        api.messages.send(access_token=token, user_id=str(user_id), message=msg[0])
 
 
 def create_message(user_id, user_message):
