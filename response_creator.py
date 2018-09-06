@@ -6,7 +6,7 @@ from settings import token
 from command_system import command_list
 
 keyboard = {
-    'one_time': False,
+    'one_time': True,
     'buttons': [[{
         'action': {
             'type': 'text',
