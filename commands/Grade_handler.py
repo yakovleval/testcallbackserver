@@ -16,7 +16,7 @@ def klass_change(user_id, user_message):
 
     cur.execute('select * from users')
     rows = cur.fetchall()
-    message = 'класс, для которого отсылается расписание, изменён на ' + '"' + user_msg + '"' + '.' + '\n' + 'теперь, отправив команду сегодня/завтра/неделя, ты получишь соответствующее расписание.'
+    message = 'класс, для которого отсылается расписание, изменён на ' + '"' + user_msg + '"' + '.' + '\n' + 'теперь, отправив команду сегодня/завтра/неделя, ты получишь соответствующее расписание. Чтобы изменить класс, просто напиши новый'
     for row in rows:
         if row[0] == user_id:
             cur.execute('update users set grade = %s where user_id = %s;', (user_msg, user_id))
@@ -26,7 +26,7 @@ def klass_change(user_id, user_message):
     cur.execute('insert into users(user_id, grade) values(%s, %s);', (user_id, user_msg))
     conn.commit()
     conn.close()
-    return message
+    return message, True
 
 
 

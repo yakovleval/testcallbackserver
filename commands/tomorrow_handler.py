@@ -124,7 +124,7 @@ def subjects_list(user_id, body):
         message += sheet.row_values(subject_line)[0].lower() + str(subj_number) + '.' + str((sheet.row_values(subject_line)[klassnumber])).lower() + '\n'
         subj_number += 1
     '''
-    return message
+    return message, True
 
 
 tomorrow_command = command_system.Command()

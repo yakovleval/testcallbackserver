@@ -124,7 +124,7 @@ def subjects_list(user_id, body):
 
 
 
-    return message
+    return message, True
 
 
 tomorrow_command = command_system.Command()

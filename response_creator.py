@@ -48,7 +48,10 @@ def send_message(user_id, user_message):
     api = vk.API(session, v=5.84)
     load_modules()
     msg = create_message(user_id, user_message)
-    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=keyboard)
+    if msg[1]:
+        api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=keyboard)
+    else:
+        api.messages.send(access_token=token, user_id=str(user_id), message=msg)
 
 
 def create_message(user_id, user_message):
