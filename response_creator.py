@@ -6,7 +6,7 @@ from command_system import command_list
 
 #keyboard = 'keyboard:{"one_time": false,"buttons": [[{"action": {"type": "text","payload": "{\"button\": \"1\"}","label": "Red"},"color": "negative"},{"action": {"type": "text","payload": "{\"button\": \"2\"}","label": "Green"},"color": "positive"}],[{"action": {"type": "text","payload": "{\"button\": \"3\"}","label": "White"},\
 #"color": "default"},{"action": {"type": "text","payload": "{\"button\": \"4\"}","label": "Blue"},"color": "primary"}]]}'
-'''
+
 keyboard_test = 'keyboard: \
 { \
     "one_time": false, \
@@ -45,7 +45,7 @@ keyboard_test = 'keyboard: \
       }] \
     ] \
   }'
-'''
+
 def load_modules():
    # путь от рабочей директории, ее можно изменить в настройках приложения
    files = os.listdir('commands')
@@ -59,7 +59,7 @@ def send_message(user_id, user_message):
     api = vk.API(session, v=5.84)
     load_modules()
     msg = create_message(user_id, user_message)
-    api.messages.send(access_token=token, user_id=str(user_id), message= msg)
+    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=keyboard_test)
 
 
 def create_message(user_id, user_message):
