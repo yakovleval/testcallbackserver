@@ -22,8 +22,8 @@ keyboard = {
             'label': 'Завтра',
         },
         'color': 'default'
-    },
-    {
+    }],
+    [{
         'action': {
             'type': 'text',
             'payload': json.dumps({'buttons': '2'}),
