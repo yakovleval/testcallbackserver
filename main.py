@@ -21,8 +21,8 @@ def processing():
         return confirmation_token
     elif data['type'] == 'message_new':
         print(data)
-        user_id = data['object']['user_id']
-        user_message = data['object']['body']
+        user_id = data['object']['from_id']
+        user_message = data['object']['text']
         send_message(user_id, user_message)  # отсылает ответ
         # Сообщение о том, что обработка прошла успешно
         return 'ok'
