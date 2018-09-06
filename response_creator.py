@@ -13,7 +13,7 @@ keyboard = {
             'payload': json.dumps({'buttons': '1'}),
             'label': 'Сегодня',
         },
-        'color': 'default'
+        'color': 'primary'
     },
     {
         'action': {
@@ -21,7 +21,7 @@ keyboard = {
             'payload': json.dumps({'buttons': '2'}),
             'label': 'Завтра',
         },
-        'color': 'default'
+        'color': 'primary'
     }],
     [{
         'action': {
@@ -29,7 +29,7 @@ keyboard = {
             'payload': json.dumps({'buttons': '2'}),
             'label': 'Неделя',
         },
-        'color': 'default'
+        'color': 'primary'
     }
     ]]
 }
