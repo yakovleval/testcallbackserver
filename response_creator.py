@@ -11,17 +11,25 @@ keyboard = {
         'action': {
             'type': 'text',
             'payload': json.dumps({'buttons': '1'}),
-            'label': 'Предыдущая',
+            'label': 'Сегодня',
         },
-        'color': 'negative'
+        'color': 'default'
     },
     {
         'action': {
             'type': 'text',
             'payload': json.dumps({'buttons': '2'}),
-            'label': 'Pred',
+            'label': 'Завтра',
         },
-        'color': 'primary'
+        'color': 'default'
+    },
+    {
+        'action': {
+            'type': 'text',
+            'payload': json.dumps({'buttons': '2'}),
+            'label': 'Неделя',
+        },
+        'color': 'default'
     }
     ]]
 }
