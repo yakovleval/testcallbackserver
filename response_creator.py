@@ -14,7 +14,7 @@ keyboard_test = 'keyboard: \
       [{ \
         "action": { \
           "type": "text", \
-          "payload": "{\"button\": \"1\"}", \
+          "payload": "{"button": "1"}", \
           "label": "Red" \
         }, \
         "color": "negative" \
@@ -30,7 +30,7 @@ keyboard_test = 'keyboard: \
       [{ \
         "action": { \
           "type": "text", \
-          "payload": "{\"button\": \"3\"}", \
+          "payload": "{"button": "3"}", \
           "label": "White" \
         }, \
         "color": "default" \
@@ -38,7 +38,7 @@ keyboard_test = 'keyboard: \
      { \
         "action": { \
           "type": "text", \
-          "payload": "{\"button\": \"4\"}", \
+          "payload": "{"button": "4"}", \
           "label": "Blue" \
         }, \
         "color": "primary" \
