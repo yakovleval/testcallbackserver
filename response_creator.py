@@ -5,9 +5,27 @@ import json
 from settings import token
 from command_system import command_list
 
-keyboard = {"keyboard":{"one_time": False,"buttons": [[{"action": {"type": "text","payload": "{\"button\": \"1\"}","label": "Red"},"color": "negative"},{"action": {"type": "text","payload": "{\"button\": \"2\"}","label": "Green"},"color": "positive"}],[{"action": {"type": "text","payload": "{\"button\": \"3\"}","label": "White"},\
-"color": "default"},{"action": {"type": "text","payload": "{\"button\": \"4\"}","label": "Blue"},"color": "primary"}]]}}
-keyboard = str(keyboard)
+KEYBOARD_STEP_1 = {
+    'one_time': False,
+    'buttons': [[{
+        'action': {
+            'type': 'text',
+            'payload': json.dumps({'buttons': '1'}),
+            'label': 'Предыдущая',
+        },
+        'color': 'negative'
+    },
+    {
+        'action': {
+            'type': 'text',
+            'payload': json.dumps({'buttons': '2'}),
+            'label': 'Pred',
+        },
+        'color': 'primary'
+    }
+    ]]
+}
+
 
 def load_modules():
    # путь от рабочей директории, ее можно изменить в настройках приложения
@@ -22,7 +40,7 @@ def send_message(user_id, user_message):
     api = vk.API(session, v=5.84)
     load_modules()
     msg = create_message(user_id, user_message)
-    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=keyboard)
+    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=str(json.dumps(KEYBOARD_STEP_1)))
 
 
 def create_message(user_id, user_message):
