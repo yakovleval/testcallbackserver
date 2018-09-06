@@ -5,7 +5,7 @@ import json
 from settings import token
 from command_system import command_list
 
-KEYBOARD_STEP_1 = {
+keyboard = {
     'one_time': False,
     'buttons': [[{
         'action': {
@@ -25,8 +25,8 @@ KEYBOARD_STEP_1 = {
     }
     ]]
 }
-
-
+keyboard = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
+keyboard = str(keyboard.decode('utf-8'))
 def load_modules():
    # путь от рабочей директории, ее можно изменить в настройках приложения
    files = os.listdir('commands')
@@ -40,7 +40,7 @@ def send_message(user_id, user_message):
     api = vk.API(session, v=5.84)
     load_modules()
     msg = create_message(user_id, user_message)
-    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=str(json.dumps(KEYBOARD_STEP_1)))
+    api.messages.send(access_token=token, user_id=str(user_id), message=msg, keyboard=str(json.dumps(keyboard)))
 
 
 def create_message(user_id, user_message):
