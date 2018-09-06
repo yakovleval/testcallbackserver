@@ -56,7 +56,7 @@ def load_modules():
 def send_message(user_id, user_message):
     '''отправляет сообщение юзеру'''
     session = vk.Session()
-    api = vk.API(session, v=5.50)
+    api = vk.API(session, v=5.84)
     load_modules()
     msg = create_message(user_id, user_message)
     api.messages.send(access_token=token, user_id=str(user_id), message= msg, keyboard = keyboard_test)
