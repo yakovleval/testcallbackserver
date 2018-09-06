@@ -7,7 +7,7 @@ from command_system import command_list
 
 keyboard = {"keyboard":{"one_time": False,"buttons": [[{"action": {"type": "text","payload": "{\"button\": \"1\"}","label": "Red"},"color": "negative"},{"action": {"type": "text","payload": "{\"button\": \"2\"}","label": "Green"},"color": "positive"}],[{"action": {"type": "text","payload": "{\"button\": \"3\"}","label": "White"},\
 "color": "default"},{"action": {"type": "text","payload": "{\"button\": \"4\"}","label": "Blue"},"color": "primary"}]]}}
-keyboard = json.dumps(keyboard)
+keyboard = str(keyboard)
 
 def load_modules():
    # путь от рабочей директории, ее можно изменить в настройках приложения
