@@ -1,12 +1,13 @@
 import vk
 import os
 import importlib
+import json
 from settings import token
 from command_system import command_list
 
-keyboard = 'keyboard:{"one_time": false,"buttons": [[{"action": {"type": "text","payload": "{\"button\": \"1\"}","label": "Red"},"color": "negative"},{"action": {"type": "text","payload": "{\"button\": \"2\"}","label": "Green"},"color": "positive"}],[{"action": {"type": "text","payload": "{\"button\": \"3\"}","label": "White"},\
-"color": "default"},{"action": {"type": "text","payload": "{\"button\": \"4\"}","label": "Blue"},"color": "primary"}]]}'
-
+keyboard = {"keyboard":{"one_time": False,"buttons": [[{"action": {"type": "text","payload": "{\"button\": \"1\"}","label": "Red"},"color": "negative"},{"action": {"type": "text","payload": "{\"button\": \"2\"}","label": "Green"},"color": "positive"}],[{"action": {"type": "text","payload": "{\"button\": \"3\"}","label": "White"},\
+"color": "default"},{"action": {"type": "text","payload": "{\"button\": \"4\"}","label": "Blue"},"color": "primary"}]]}}
+keyboard = json.dumps(keyboard)
 
 def load_modules():
    # путь от рабочей директории, ее можно изменить в настройках приложения
