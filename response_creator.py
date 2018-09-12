@@ -58,7 +58,7 @@ def create_message(user_id, user_message):
     '''ищет сообщение юзера в списке команд, в зависимости от того, что он написал,
     сгенерируется соответствующее сообщение
     '''
-    message = "Прости, не понимаю тебя."
+    message = ("Прости, не понимаю тебя.", True)
     for c in command_list:
         if user_message.lower() in c.keys:
             message = c.process(user_id, user_message)
