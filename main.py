@@ -1,12 +1,12 @@
 
 from response_creator import send_message
 from flask import Flask, request, json
-
+import vk
 
 
 app = Flask(__name__)
 
-
+key = '1e81968a155a6b554c34fd710349e7410ecd6804ff58788de3b2d1edb40e0af47cf4671546184958bc905'
 
 confirmation_token = '6071d7c2'
 
